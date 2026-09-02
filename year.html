@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>#ГОД / YEAR — JEKKA</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .year-page {
+      background: #0a0a0a;
+      color: #f5f5f1;
+    }
+
+    .year-page .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: linear-gradient(to bottom, rgba(0,0,0,.78), rgba(0,0,0,0));
+    }
+
+    .year-page .brand img {
+      filter: brightness(0) invert(1);
+    }
+
+    .year-page .desktop-nav a,
+    .year-page .menu-toggle {
+      color: #fff;
+    }
+
+    .year-project {
+      overflow: hidden;
+    }
+
+    .year-cover {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .year-cover video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .year-cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.25);
+    }
+
+    .year-cover-title {
+      position: relative;
+      z-index: 2;
+      margin: 0;
+      font-size: clamp(4.5rem, 14vw, 11rem);
+      line-height: .8;
+      letter-spacing: -.06em;
+      color: #fff;
+      text-align: center;
+    }
+
+    .year-introduction,
+    .year-section,
+    .year-team,
+    .year-live {
+      width: min(1180px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .year-introduction {
+      padding: 8rem 0 7rem;
+      max-width: 920px;
+    }
+
+    .year-introduction p {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: var(--body-size);
+      line-height: 1.55;
+      margin: 0 0 2rem;
+    }
+
+    .year-section {
+      padding: 7rem 0;
+      border-top: 1px solid rgba(255,255,255,.22);
+    }
+
+    .year-section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: clamp(2rem, 7vw, 7rem);
+      align-items: start;
+      margin-bottom: 4rem;
+    }
+
+    .year-section h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: var(--heading-size);
+      line-height: .88;
+      letter-spacing: -.05em;
+      margin: 0;
+    }
+
+    .year-section .chapter-description {
+      font-family: Georgia, "Times New Roman", serif;
+      max-width: 580px;
+      font-size: var(--body-size);
+      line-height: 1.65;
+      margin: .35rem 0 0;
+    }
+
+    .year-cover-gif {
+      width: min(520px, 100%);
+      aspect-ratio: 1;
+      object-fit: contain;
+      display: block;
+      background: #111;
+    }
+
+    .year-media-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: start;
+      justify-items: center;
+      margin: 3rem auto 4rem;
+    }
+
+    .year-media-row.single {
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .year-video {
+      width: min(100%, 900px);
+      aspect-ratio: 16 / 9;
+      border: 0;
+      display: block;
+      background: #111;
+    }
+
+    .year-story {
+      font-family: Georgia, "Times New Roman", serif;
+      max-width: 760px;
+      margin: 5rem auto;
+      white-space: normal;
+      font-size: var(--body-size);
+      line-height: 1.85;
+    }
+
+    .year-story.poem {
+      max-width: 620px;
+    }
+
+    .year-story p {
+      margin: 0 0 1.25rem;
+    }
+
+    .year-story p:last-child {
+      margin-bottom: 0;
+    }
+
+    .year-player {
+      max-width: 700px;
+      margin: 4rem auto 0;
+    }
+
+    .year-player iframe {
+      width: 100% !important;
+      max-width: 700px;
+      border: 0;
+      display: block;
+    }
+
+    .year-team {
+      padding: 7rem 0;
+      border-top: 1px solid rgba(255,255,255,.22);
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 4rem;
+    }
+
+    .year-team h2,
+    .year-live h2 {
+      font-size: var(--heading-size);
+      line-height: 1;
+      margin: 0;
+    }
+
+    .year-team-list {
+      columns: 2;
+      column-gap: 3rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    .year-team-list li {
+      break-inside: avoid;
+      margin-bottom: .45rem;
+    }
+
+    .year-live {
+      padding: 7rem 0 9rem;
+      border-top: 1px solid rgba(255,255,255,.22);
+    }
+
+    .year-live h2 {
+      margin-bottom: 3rem;
+    }
+
+    .year-live-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .year-live-grid figure {
+      margin: 0;
+      background: #151515;
+      overflow: hidden;
+    }
+
+    .year-live-grid img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+
+    .year-live-grid figure:nth-child(2),
+    .year-live-grid figure:nth-child(5) {
+      grid-row: span 2;
+    }
+
+    .year-live-grid figure:nth-child(2) img,
+    .year-live-grid figure:nth-child(5) img {
+      height: 100%;
+      aspect-ratio: auto;
+    }
+
+    .year-live-grid figure:hover img {
+      transform: scale(1.015);
+    }
+
+    .year-page .footer {
+      border-top: 1px solid rgba(255,255,255,.2);
+    }
+    .two-columns {
+  column-count: 2;
+  column-gap: 3rem;
+}
+
+    @media (max-width: 760px) {
+      .year-introduction,
+      .year-section,
+      .year-team,
+      .year-live {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .year-introduction {
+        padding: 6rem 0 5rem;
+      }
+
+      .year-section {
+        padding: 5rem 0;
+      }
+
+      .year-section-head,
+      .year-media-row,
+      .year-team {
+        grid-template-columns: 1fr;
+      }
+
+      .year-section h2 {
+        font-size: var(--heading-size);
+      }
+
+      .year-story {
+        margin: 3.5rem 0;
+      }
+
+      .year-team-list {
+        columns: 1;
+      }
+
+      .year-live-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .year-live-grid figure:nth-child(2),
+      .year-live-grid figure:nth-child(5) {
+        grid-row: auto;
+      }
+
+      .year-live-grid figure:nth-child(2) img,
+      .year-live-grid figure:nth-child(5) img {
+        height: auto;
+        aspect-ratio: 4 / 3;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .year-live-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body class="year-page">
+  <header class="site-header dark-header">
+    <a class="brand" href="index.html"><img src="assets/jekka_logo.png" alt="JEKKA" /></a>
+    <nav class="desktop-nav">
+      <a href="about.html">About</a>
+      <a href="artistic-projects.html">Artistic Projects</a>
+      <a href="commercial-projects.html">Commercial Projects</a>
+      <a href="dj.html">DJing</a>
+      <a href="workshops.html">Workshops</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">Menu</button>
+  </header>
+
+  <main class="year-project">
+    <section class="year-cover">
+      <video autoplay muted loop playsinline>
+        <source src="assets/videos/god_background_video.mp4" type="video/mp4" />
+      </video>
+      <h1 class="year-cover-title">#ГОД</h1>
+    </section>
+
+    <div class="year-back-wrap">
+      <a class="back-link" href="artistic-projects.html">← Artistic Projects</a>
+    </div>
+
+    <section class="year-introduction">
+      <p>In 2017 Jekka presented <strong>#ГОД (YEAR)</strong> — an exploratory album investigating Russian folklore and digital realities. During a whole year, a team of directors, writers, performers and artists reimagined Russian folklore. This journey was expressed in a series of multimedia events, performances, videos, folk singing and new rituals. Public spaces and social networks became the epicentre of the project.</p>
+
+      <p>#ГОД is interpreting the calendar and life cycle of Slavic people. Mixing the natural and technological, history and today’s context, where the voice is the main driving force. That is why Jekka’s new releases are filled with rich vocals and cold industrial and synthetic sounds. The #ГОД project is an evolution of understanding folk, it is a search for your inner voice through ancient rituals and the cultural and acoustic code of folklore.</p>
+
+      <p>#ГОД consists of 4 EPs, each reflecting a significant point in the calendar and life cycle of Slavic people.</p>
+    </section>
+
+    <section class="year-section" id="rozhdenie">
+      <div class="year-section-head">
+        <div>
+          <h2>ROZHDENIE</h2>
+          <p class="chapter-description">ROZHDENIE embodies the transition from “that” world into “this” world, it is a ritual of a new person coming into the world of the living and also symbolises the awakening of nature, the beginning of a new cycle.</p>
+        </div>
+        <img class="year-cover-gif" src="assets/rozhdenie.gif" alt="ROZHDENIE artwork" />
+      </div>
+
+      <div class="year-media-row single">
+        <iframe class="year-video" src="https://www.youtube.com/embed/rWcH8g-t8Go" title="Skazka" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+
+      <div class="year-story"><p>The night was still, dark and moonless. The snow was whispering outside the house, the gates creaked, a bird of prophecy flew past and dropped a golden feather straight down the chimney and into the chambers.</p><p>The house stood illuminated by extraordinary light and a song echoed across the land. When the people came out of the house, awoken from their dream they saw the faraway stars burning in silver flames and all the houses near glowing as if the sky reflected in the earth.</p><p>The bird’s mystical song brought light across the sky and opened all the gates of all the houses, whispering eternal words. A story wide as the sky and an endless field looking at each other forever in a dream.</p><p>The night was very quiet, the field was vast and in that field one could find himself a house alight with welcome. And a faraway song of a new beginning and a rebirth.</p><p>The young women set out to call upon the Spring. Across the icy mirror of the water wide they went. For three days and three nights they walked with songs and merriment. The ice thundered, the reddish sun moved from shore to shore and out of the woods, across the field.</p><p>The cold water shuddered and rumbled as the winter storm turned into a bird's song. The young women called upon the Spring singing, their spellbinding voices bringing blissful life across the frozen water, warm air into the waking forest.</p><p>The young women stepped out from the river with the water high. A giant sun above, gleaming. The forest swaying as if woken from a dream, enchanted.</p><p>The young women stepped into the forest. And saw a tree. A child slept wrapped in its broad roots.</p><p>The young women were singing a lullaby.</p></div>
+
+      <div class="year-player">
+        <iframe style="height:241px;" src="https://bandcamp.com/EmbeddedPlayer/album=3812494318/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://jekka.bandcamp.com/album/rozhdenie">Rozhdenie by Jekka</a></iframe>
+      </div>
+    </section>
+
+    <section class="year-section" id="yunost">
+      <div class="year-section-head">
+        <div>
+          <h2>YUNOST</h2>
+          <p class="chapter-description">YUNOST is the second installment of #ГОД and conveys initiation rituals, circle dances as a reflection of nature and the role of participants in the ritual. YUNOST is the border between Spring and Summer, it is a rave of nature, inner and outer transformation.</p>
+        </div>
+        <img class="year-cover-gif" src="assets/yunost.gif" alt="YUNOST artwork" />
+      </div>
+
+      <div class="year-story poem">Oh wonder tree<br>
+Grew branch after branch<br>
+To rise high<br>
+Ripened the blood<br>
+Like a red berry<br>
+The wonderous beautiful tree<br>
+Grew and stronger it got<br>
+And not the birds that the nest made<br>
+But the bright stars<br>
+Found home in it<br>
+And not the small creatures<br>
+Around it walked, singing,<br>
+But the planets<br>
+Oh wonder tree<br>
+Ripened the red fruit<br>
+Ripened the blue fruit<br>
+Ripened the black fruit<br>
+And the beautiful gifts</div>
+
+      <div class="year-player">
+        <iframe style="height:241px;" src="https://bandcamp.com/EmbeddedPlayer/album=981179742/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://jekka.bandcamp.com/album/yunost">YUNOST by Jekka</a></iframe>
+      </div>
+
+      <div class="year-media-row single">
+        <iframe class="year-video" src="https://www.youtube.com/embed/R8fPo8w_elQ" title="Sorry" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section class="year-section" id="svadba">
+      <div class="year-section-head">
+        <div>
+          <h2>SVADBA</h2>
+          <p class="chapter-description">SVADBA (Wedding) is the third instalment of the #ГОД project and expresses the inner transformation of a person, his or her communication with the outside world. The opposition of mine/foreign arises, the life space around the person becomes narrow, he or she becomes wordless and other participants of the ritual speak on his/her behalf. This is a process of loss and gain through different ritual symbols and objects.</p>
+        </div>
+        <img class="year-cover-gif" src="assets/svadba.gif" alt="SVADBA artwork" />
+      </div>
+
+      <div class="year-story poem"><p class="two-columns">The girls were weaving,<br>
+To cover the tree with the quilt<br>
+So the blackbirds<br>
+Wouldn’t rest on it<br>
+So the stars wouldn’t fall<br>
+And get tangled in the branches<br>
+The girls were weaving<br>
+Covering the river<br>
+Covering the field<br>
+So the cold winds<br>
+Wouldn’t mix the water and the bread<br>
+The young men are coming<br>
+Coming for the girls<br>
+Not seeing the quilt<br>
+Falling under the ice<br>
+The girls wept<br>
+Day and night they lamented<br>
+Of the young men<br>
+Underwater<br>
+The girls were weaving<br>
+Covering themselves with the quilt<br>
+And found themselves<br>
+On the other side of the river<br>
+They saw a reflection of the tree<br>
+The young men under it<br>
+Sleeping and waiting<br>
+The girls started weaving<br>
+Crowns from leaves.<br>
+Singing and breaking the branches:<br>
+“One hand waking, the other covering<br>
+One hand leading, the other braiding”<br>
+As the girls were singing, the underwater winds were rising<br>
+The river was changing<br>
+The tree shook and up it went<br>
+The quilt into strings<br>
+Into rods it turned<br>
+They put on the crowns<br>
+And their braids fell<br>
+The young men slept and slept and suddenly awoke<br>
+“Down the aisle I go, to wake you<br>
+To share the house and table”<br>
+The earth shook and shivered<br>
+With all its might the tree<br>
+Rose up into the sky<br>
+An island just beneath with grass so green and flowers so bright<br>
+Rendered the ceremony.<br>
+The storm died.<br>
+And plants spread all over from the wondrous island<br>
+The girls were weaving the quilt<br>
+The young men singing to the girls.</p></div>
+
+      <div class="year-player">
+        <iframe style="height:340px;" src="https://bandcamp.com/EmbeddedPlayer/album=3365009447/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://jekka.bandcamp.com/album/svadba">SVADBA by Jekka</a></iframe>
+      </div>
+    </section>
+
+    <section class="year-section" id="plach">
+      <div class="year-section-head">
+        <div>
+          <h2>PLACH</h2>
+          <p class="chapter-description">The end of life is the beginning of a transition to the status of an ancestor, the opposition of “that” world and “this” world, when the soul separates from its former place and inhabits an invisible otherworldly dimension. Lamentations is the main tool of communication with the world of the dead. Nature falls asleep in winter and Yule begins — a time of temporary chaos, statelessness, necessary for renewing the world and transforming the old into the new.</p>
+        </div>
+        <img class="year-cover-gif" src="assets/plach.gif" alt="PLACH artwork" />
+      </div>
+      <div class="year-player">
+        <iframe style="border: 0; width: 700px; height: 208px;" src="https://bandcamp.com/EmbeddedPlayer/album=429182457/size=large/bgcol=ffffff/linkcol=0687f5/artwork=small/transparent=true/" seamless><a href="https://jekka.bandcamp.com/album/plach">PLACH by Jekka</a></iframe>
+      </div>
+    </section>
+
+    <section class="year-team">
+      <h2>PROJECT TEAM</h2>
+      <ul class="year-team-list">
+        <li>Maria Izmalkova — vocalist</li>
+        <li>Tatiana Eliseeva — vocalist</li>
+        <li>Maria Sivkova — vocalist</li>
+        <li>Tatiana Gildebrant — vocalist</li>
+        <li>Galina Nikolaeva — vocalist</li>
+        <li>Maria Patsyuk — performer, director</li>
+        <li>Anastasia Trytyakova — performer, storyteller</li>
+        <li>Evgenia Drobina — performer</li>
+        <li>Anton Berkasov — visual artist</li>
+        <li>Natalia Butova — DOP</li>
+        <li>Lesya Rusakovich — fashion designer</li>
+        <li>Panika Derevya — experiential designer</li>
+      </ul>
+    </section>
+
+    <section class="year-live">
+      <div class="section-row">
+        <h2>LIVE / PERFORMANCES</h2>
+        <p class="gallery-count"><span class="gallery-current">1</span> / <span class="gallery-total">6</span></p>
+      </div>
+      <div class="slideshow year-slideshow" data-slideshow>
+        <div class="slides">
+          <img class="slide is-active" src="assets/year-live-01.jpg" alt="Live performance from #ГОД 1" onerror="this.remove()">
+          <img class="slide" src="assets/year-live-02.jpg" alt="Live performance from #ГОД 2" onerror="this.remove()">
+          <img class="slide" src="assets/year-live-03.jpg" alt="Live performance from #ГОД 3" onerror="this.remove()">
+          <img class="slide" src="assets/year-live-04.jpg" alt="Live performance from #ГОД 4" onerror="this.remove()">
+          <img class="slide" src="assets/year-live-05.jpg" alt="Live performance from #ГОД 5" onerror="this.remove()">
+          <img class="slide" src="assets/year-live-06.jpg" alt="Live performance from #ГОД 6" onerror="this.remove()">
+        </div>
+        <button class="slide-control slide-prev" aria-label="Previous image">←</button>
+        <button class="slide-control slide-next" aria-label="Next image">→</button>
+      </div>
+
+      <div class="year-media-row single">
+        <iframe class="year-video" src="https://www.youtube.com/embed/jLMjkAcOBwA?start=815" title="Jekka Live at Synthposium" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe class="year-video" src="https://www.youtube.com/embed/XFfCJAQGYCY" title="Jekka live at Sofar Sounds" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+  <p>JEKKA</p>
+  <div class="socials">
+    <a href="https://jekka.bandcamp.com/" target="_blank" rel="noopener">Bandcamp</a>
+    <a href="https://www.instagram.com/iamjekka" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://open.spotify.com/artist/4BhTRXWRiMHkfh1yya2gT1?si=F8z4xYpkQqOnsrXxwvv6Cg" target="_blank" rel="noopener">Spotify</a>
+    <a href="https://soundcloud.com/jekka" target="_blank" rel="noopener">SoundCloud</a>
+    <a href="https://www.youtube.com/@iamjekkamusic" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.subvert.fm/jekka" target="_blank" rel="noopener">Subvert</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+  <div class="mobile-menu" hidden>
+    <a href="about.html">About</a>
+    <a href="artistic-projects.html">Artistic Projects</a>
+    <a href="commercial-projects.html">Commercial Projects</a>
+    <a href="dj.html">DJing</a>
+    <a href="workshops.html">Workshops</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
